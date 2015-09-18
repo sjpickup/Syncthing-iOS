@@ -1,0 +1,77 @@
+{
+	"ImportPath": "github.com/syncthing/syncthing",
+	"GoVersion": "go1.4",
+	"Packages": [
+		"./cmd/..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/bkaradzic/go-lz4",
+			"Rev": "4f7c2045dbd17b802370e2e6022200468abf02ba"
+		},
+		{
+			"ImportPath": "github.com/calmh/logger",
+			"Rev": "c96f6a1a8c7b6bf2f4860c667867d90174799eb2"
+		},
+		{
+			"ImportPath": "github.com/calmh/luhn",
+			"Rev": "0c8388ff95fa92d4094011e5a04fc99dea3d1632"
+		},
+		{
+			"ImportPath": "github.com/calmh/xdr",
+			"Rev": "5f7208e86762911861c94f1849eddbfc0a60cbf0"
+		},
+		{
+			"ImportPath": "github.com/google/go-snappy/snappy",
+			"Rev": "eaa750b9bf4dcb7cb20454be850613b66cda3273"
+		},
+		{
+			"ImportPath": "github.com/juju/ratelimit",
+			"Rev": "faa59ce93750e747b2997635e8b7daf30024b1ac"
+		},
+		{
+			"ImportPath": "github.com/kardianos/osext",
+			"Rev": "6e7f843663477789fac7c02def0d0909e969b4e5"
+		},
+		{
+			"ImportPath": "github.com/syncthing/protocol",
+			"Rev": "95e15c95f21b81b09772f07de5c142a3e68f78db"
+		},
+		{
+			"ImportPath": "github.com/syndtr/goleveldb/leveldb",
+			"Rev": "a06509502ca32565bdf74afc1e573050023f261c"
+		},
+		{
+			"ImportPath": "github.com/thejerf/suture",
+			"Rev": "ff19fb384c3fe30f42717967eaa69da91e5f317c"
+		},
+		{
+			"ImportPath": "github.com/vitrun/qart/coding",
+			"Rev": "ccb109cf25f0cd24474da73b9fee4e7a3e8a8ce0"
+		},
+		{
+			"ImportPath": "github.com/vitrun/qart/gf256",
+			"Rev": "ccb109cf25f0cd24474da73b9fee4e7a3e8a8ce0"
+		},
+		{
+			"ImportPath": "github.com/vitrun/qart/qr",
+			"Rev": "ccb109cf25f0cd24474da73b9fee4e7a3e8a8ce0"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/bcrypt",
+			"Rev": "1e856cbfdf9bc25eefca75f83f25d55e35ae72e0"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/blowfish",
+			"Rev": "1e856cbfdf9bc25eefca75f83f25d55e35ae72e0"
+		},
+		{
+			"ImportPath": "golang.org/x/text/transform",
+			"Rev": "df923bbb63f8ea3a26bb743e2a497abd0ab585f7"
+		},
+		{
+			"ImportPath": "golang.org/x/text/unicode/norm",
+			"Rev": "df923bbb63f8ea3a26bb743e2a497abd0ab585f7"
+		}
+	]
+}
