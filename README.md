@@ -27,7 +27,7 @@ This is a Syncthing-iOS Port with Golang Libary for iOS. I have compiled it with
     
     Let’s just try those instructions he gave, without modifying anything:
 
-    $ cd src
+   /* $ cd src
     $ GOARM=7 CGO_ENABLED=1 GOARCH=arm \
         CC_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
         CXX_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
@@ -39,9 +39,10 @@ This is a Syncthing-iOS Port with Golang Libary for iOS. I have compiled it with
     libbio
     liblink
     cmd/gc
-    ...
+    ... */
 
-    #Now you can compile Golang for iOS successful!
+    
+    #Now you can compile Golang for iOS successful
 
 
 5. Please change in /IDZWebBrowser/build-go.sh to your Project paths. (build-go.sh do all the job for you with gcc)
