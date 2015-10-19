@@ -7,58 +7,50 @@ This is a Syncthing-iOS Port with Golang Libary for iOS. I have compiled it with
 3. Get a clone from Golang Solurce https://github.com/golang/go
 4. Edit the file /misc/iso/clangwrap.sh 
 
-    #!/bin/sh
-    # This uses the latest available iOS SDK, which is recommended.
-    # To select a specific SDK, run ‘xcodebuild -showsdks’
-    # to see the available SDKs and replace iphoneos with one of them.
-    SDK=iphoneos
-    SDK_PATH="xcrun —sdk $SDK —show-sdk-path"
-    export IPHONEOS_DEPLOYMENT_TARGET=7.0
-    # cmd/cgo doesn’t support llvm-gcc-4.2, so we have to use clang.
-    CLANG="xcrun —sdk $SDK —find clang"
-    exec “$CLANG” -arch armv7 -isysroot “$SDK_PATH” “$@”
+```
+#!/bin/sh
+# This uses the latest available iOS SDK, which is recommended.
+# To select a specific SDK, run ‘xcodebuild -showsdks’
+# to see the available SDKs and replace iphoneos with one of them.
+SDK=iphoneos
+SDK_PATH="xcrun —sdk $SDK —show-sdk-path"
+export IPHONEOS_DEPLOYMENT_TARGET=7.0
+# cmd/cgo doesn’t support llvm-gcc-4.2, so we have to use clang.
+CLANG="xcrun —sdk $SDK —find clang"
+exec “$CLANG” -arch armv7 -isysroot “$SDK_PATH” “$@”
 
 
-   To build a cross compiling toolchain for iOS on OS X, first modify clangwrap.sh in misc/ios to match your setup. And then run:
-    GOARM=7 CGO_ENABLED=1 GOARCH=arm CC_FOR_TARGET="pwd"/../misc/ios/clangwrap.sh \
-     CXX_FOR_TARGET="pwd"/../misc/ios/clangwrap.sh ./make.bash
-    To build a program, use the normal go build command:
-    CGO_ENABLED=1 GOARCH=arm go build import/path
-    
-    Let’s just try those instructions he gave, without modifying anything:
+To build a cross compiling toolchain for iOS on OS X, first modify clangwrap.sh in misc/ios to match your setup. And then run:
+GOARM=7 CGO_ENABLED=1 GOARCH=arm CC_FOR_TARGET="pwd"/../misc/ios/clangwrap.sh \
+ CXX_FOR_TARGET="pwd"/../misc/ios/clangwrap.sh ./make.bash
+To build a program, use the normal go build command:
+CGO_ENABLED=1 GOARCH=arm go build import/path
 
-   /* $ cd src
-    $ GOARM=7 CGO_ENABLED=1 GOARCH=arm \
-        CC_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
-        CXX_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
-        ./make.bash 
-    ###### Building C bootstrap tool.
-    cmd/dist
-    ##### Building compilers and Go bootstrap tool for host, darwin/amd64.
-    lib9
-    libbio
-    liblink
-    cmd/gc
-    ... */
+Let’s just try those instructions he gave, without modifying anything:
 
-    
-    #Now you can compile Golang for iOS successful
+/* $ cd src
+$ GOARM=7 CGO_ENABLED=1 GOARCH=arm \
+    CC_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
+    CXX_FOR_TARGET=`pwd`/../misc/ios/clangwrap.sh \
+    ./make.bash 
+###### Building C bootstrap tool.
+cmd/dist
+##### Building compilers and Go bootstrap tool for host, darwin/amd64.
+lib9
+libbio
+liblink
+cmd/gc
+... */
 
+#Now you can compile Golang for iOS successful
+```
 
-5. Please change in /IDZWebBrowser/build-go.sh to your Project paths. (build-go.sh do all the job for you with gcc)
+5. Please change in `/IDZWebBrowser/build-go.sh` to your Project paths. (`build-go.sh` do all the job for you with gcc)
 6. Inside of Xcode go to the tab "Build Phases"
-    There create a Run Script when not existing and a our build-go.sh script
+    There create a Run Script when not existing and a our `build-go.sh` script
       1. Input Files
-        $(SRCROOT)/main.go
+        `$(SRCROOT)/main.go`
       2. Output Files
-        $(DERIVED_FILE_DIR)/glue-go.a
-        
+        `$(DERIVED_FILE_DIR)/glue-go.a`
 
 This is a very very basic how to, and troubles? write me... 
-
-
-    
-
-
-
-
