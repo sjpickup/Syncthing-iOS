@@ -1,0 +1,19 @@
+# Xcode
+## Build generated
+build/
+DerivedData/
+
+IDZWebBrowser/cgo-obj/
+IDZWebBrowser/_cgo_export.h
+IDZWebBrowser/go-output.a
+IDZWebBrowser/syncthing/syncthing
+
+## Various settings
+*.pbxuser
+xcuserdata/
+
+## Linux
+*.swp
+
+## Keep temporary data files here
+tmp
