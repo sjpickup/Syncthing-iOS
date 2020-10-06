@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="assets/img/favicon.png">
 
   <title>{{thisDeviceName()}} | Syncthing</title>
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="assets/font/raleway.css" rel="stylesheet">
   <link href="assets/css/overrides.css" rel="stylesheet">
 </head>
@@ -27,29 +27,23 @@
 
   <nav class="navbar navbar-top navbar-default" role="navigation">
     <div class="container">
-      <span class="navbar-brand"><img class="logo" src="assets/img/logo-horizontal.svg" height="32" width="117"/></span>
-      <p class="navbar-text hidden-xs" ng-class="{'hidden-sm':upgradeInfo && upgradeInfo.newer}">{{thisDeviceName()}}</p>
+    
+      <ul class="nav navbar-nav">
+     	<li><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="My ID" ng-click="idDevice()"><span class="glyphicon glyphicon-qrcode"></span></button></li>
+     	<li><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add Folder" ng-click="addFolder()"><span class="glyphicon glyphicon-folder-open"></span><!--<span translate>Add Folder</span>--></button></li>
+     	<li><button class="btn btn-primary" data-toggle="tooltip" data-placement="bottom" title="Add Device" ng-click="addDevice()"><span class="glyphicon glyphicon-phone"></span><!--<span translate>Add Device</span>--></button></li>
+      </ul>
+     
+     
       <ul class="nav navbar-nav navbar-right">
-        <li ng-if="upgradeInfo && upgradeInfo.newer">
-          <button type="button" class="btn navbar-btn btn-primary btn-sm" href="" ng-click="upgrade()">
-            <span class="glyphicon glyphicon-chevron-up"></span>&nbsp;
-            <span translate translate-value-version="{{upgradeInfo.latest}}">Upgrade To {%version%}</span>
-          </button>
-        </li>
-        <li ng-if="upgradeInfo && upgradeInfo.majorNewer">
-          <button type="button" class="btn navbar-btn btn-danger btn-sm" href="" ng-click="upgradeMajor()">
-            <span class="glyphicon glyphicon-chevron-up"></span>&nbsp;
-            <span translate translate-value-version="{{upgradeInfo.latest}}">Upgrade To {%version%}</span>
-          </button>
-        </li>
         <li class="dropdown" language-select></li>
-        <li class="hidden-xs">
+        <li>
           <a href="http://docs.syncthing.net/intro/gui.html" target="_blank">
-            <span class="glyphicon glyphicon-book"></span>&nbsp;<span translate>Help</span>
+            <span class="glyphicon glyphicon-question-sign"></span>
           </a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-label="Edit"></span>&nbsp;<span translate>Actions</span><span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-label="Edit"></span></span></a>
           <ul class="dropdown-menu">
             <li><a href="" ng-click="editSettings()"><span class="glyphicon glyphicon-cog"></span>&nbsp;<span translate>Settings</span></a></li>
             <li><a href="" ng-click="idDevice()"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;<span translate>Show ID</span></a></li>
@@ -57,11 +51,6 @@
             <li><a href="" ng-click="shutdown()"><span class="glyphicon glyphicon-off"></span>&nbsp;<span translate>Shutdown</span></a></li>
             <li><a href="" ng-click="restart()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;<span translate>Restart</span></a></li>
             <li class="divider"></li>
-            <li class="visible-xs">
-              <a href="http://docs.syncthing.net/intro/gui.html" target="_blank">
-                <span class="glyphicon glyphicon-book"></span>&nbsp;<span translate>Help</span>
-              </a>
-            </li>
             <li><a href="" ng-click="about()"><span class="glyphicon glyphicon-heart-empty"></span>&nbsp;<span translate>About</span></a></li>
             <li class="divider"></li>
             <li><a href="" ng-click="advanced()"><span class="glyphicon glyphicon-cog"></span>&nbsp;<span translate>Advanced</span></a></li>
@@ -173,16 +162,44 @@
         </div>
       </div>
     </div>
+    
+    
+  <!-- Panel: More Info Global --> 
+  
+  <modal id="moreInfoFolder" status="danger" icon="exclamation-sign" title="TEST">
+   
+                
+  </modal>
 
     <!-- First regular row -->
 
     <div class="row">
+    
+    
 
-      <!-- Folder list (top left) -->
 
-      <div class="col-md-6">
+
+
+
+
+
+
+<div class="container">
+	<ul id="myTab" class="nav nav-tabs">
+	   <li class="active">
+		  <a href="#folders" data-toggle="tab">
+			 Folders
+		  </a>
+	   </li>
+	   <li><a href="#devices" data-toggle="tab">Devices</a></li>
+	</ul>
+	<div id="myTabContent" class="tab-content">
+	   <div class="tab-pane fade in active" id="folders">
+		  
+		  
+		  
+		<!-- Folder list (top left) -->
         <div class="panel-group" id="folders">
-        <div class="visible-xs"><h3><span translate>Folders</span></h3><hr></div>
           <div class="panel panel-default" ng-repeat="folder in folderList()">
             <div class="panel-heading" data-toggle="collapse" data-parent="#folders" href="#folder-{{$index}}" style="cursor: pointer">
               <div class="panel-progress" ng-show="folderStatus(folder) == 'syncing'" ng-attr-style="width: {{syncPercentage(folder.id)}}%"></div>
@@ -204,7 +221,7 @@
             </div>
             <div id="folder-{{$index}}" class="panel-collapse collapse">
               <div class="panel-body">
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed">
                   <tbody>
                     <tr>
                       <th><span class="glyphicon glyphicon-folder-open"></span>&nbsp;<span translate>Folder Path</span></th>
@@ -314,73 +331,19 @@
           <button class="btn btn-sm btn-default" ng-click="addFolder()"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span translate>Add Folder</span></button>
         </span>
         <div class="clearfix"></div>
-        <hr class="visible-sm"/>
-      </div>
-
-      <!-- Device list (top right) -->
-
-      <!-- This device -->
-
-      <div class="col-md-6">
-      <div class="visible-xs"><h3><span translate>Devices</span></h3><hr></div>
-        <div class="panel panel-default" ng-repeat="deviceCfg in [thisDevice()]">
-          <div class="panel-heading" data-toggle="collapse" href="#device-this" style="cursor: pointer">
-            <h3 class="panel-title">
-              <identicon data-value="deviceCfg.deviceID"></identicon>&emsp;{{deviceName(deviceCfg)}}
-            </h3>
-          </div>
-          <div id="device-this" class="panel-collapse collapse in">
-            <div class="panel-body">
-              <table class="table table-condensed table-striped">
-                <tbody>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;<span translate>Download Rate</span></th>
-                    <td class="text-right">{{connectionsTotal.inbps | binary}}B/s ({{connectionsTotal.inBytesTotal | binary}}B)</td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;<span translate>Upload Rate</span></th>
-                    <td class="text-right">{{connectionsTotal.outbps | binary}}B/s ({{connectionsTotal.outBytesTotal | binary}}B)</td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-home"></span>&nbsp;<span translate>Local State (Total)</span> </th>
-                    <td class="text-right">{{foldersTotalLocalFiles | alwaysNumber}} <span translate>items</span>, ~{{ foldersTotalLocalBytes | binary}}B</td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-th"></span>&nbsp;<span translate>RAM Utilization</span></th>
-                    <td class="text-right">{{system.sys | binary}}B</td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-dashboard"></span>&nbsp;<span translate>CPU Utilization</span></th>
-                    <td class="text-right">{{system.cpuPercent | alwaysNumber | natural:1}}%</td>
-                  </tr>
-                  <tr ng-if="system.extAnnounceOK != undefined && announceServersTotal > 0">
-                    <th><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<span translate>Global Discovery</span></th>
-                    <td class="text-right">
-                      <span ng-if="announceServersFailed.length == 0" class="data text-success">
-                        <span>OK</span>
-                      </span>
-                      <span ng-if="announceServersFailed.length != 0" class="data" ng-class="{'text-danger': announceServersFailed.length == announceServersTotal}">
-                        <span popover data-trigger="hover" data-placement="bottom" data-content="{{announceServersFailed.join('\n')}}">
-                          {{announceServersTotal-announceServersFailed.length}}/{{announceServersTotal}}
-                        </span>
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-time"></span>&nbsp;<span translate>Uptime</span></th>
-                    <td class="text-right">{{system.uptime | duration:"m"}}</td>
-                  </tr>
-                  <tr>
-                    <th><span class="glyphicon glyphicon-tag"></span>&nbsp;<span translate>Version</span></th>
-                    <td class="text-right">{{versionString()}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Remote devices -->
+		  
+		  
+		  
+		  
+		  
+		  
+	   </div>
+	   <div class="tab-pane fade" id="devices">
+		  
+		  
+		  
+		  
+		          <!-- Remote devices -->
 
         <div class="panel-group" id="devices">
           <div class="panel panel-default" ng-repeat="deviceCfg in otherDevices()">
@@ -400,7 +363,7 @@
             </div>
             <div id="device-{{$index}}" class="panel-collapse collapse">
               <div class="panel-body">
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed">
                   <tbody>
                     <tr ng-if="connections[deviceCfg.deviceID]">
                       <th><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;<span translate>Download Rate</span></th>
@@ -453,13 +416,167 @@
           <div class="clearfix"></div>
         </div>
       </div>
+		  
+		  
+		  
+		  
+		  
+		  
+	   </div>
+	</div>
+</div>
+
+
+
+
+
+
+    <!-- Folder list (top left) -->
+    <!--<div class="col-md-12">           
+	  <table class="table">
+		<thead>
+		  <tr>
+			<th>Folder</th>
+			<th>Path</th>
+			<th>Shared with</th>
+			<th>Status</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr ng-repeat="folder in folderList()">
+			<td>{{folder.id}}</td>
+		    <td><a href="file:///{{folder.path}}" >{{folder.path}}</a></td>
+			<td>{{sharesFolder(folder)}}</td>
+			<td class="text-{{folderClass(folder)}}" ng-switch="folderStatus(folder)">
+			
+			<span ng-switch-when="unknown"><span class="hidden-xs" translate>Unknown</span><span class="visible-xs">&#9724;</span></span>
+                  <span ng-switch-when="unshared"><span class="hidden-xs" translate>Unshared</span><span class="visible-xs">&#9724;</span></span>
+                  <span ng-switch-when="stopped"><span class="hidden-xs" translate>Stopped</span><span class="visible-xs">&#9724;</span></span>
+                  <span ng-switch-when="scanning"><span class="hidden-xs" translate>Scanning</span><span class="visible-xs">&#9724;</span></span>
+                  <span ng-switch-when="idle"><span class="hidden-xs" translate>Up to Date</span><span class="visible-xs">&#9724;</span></span>
+                  <span ng-switch-when="syncing">
+                    <span class="hidden-xs" translate>Syncing</span>
+                    ({{syncPercentage(folder.id)}}%)
+                  </span>
+                  <span ng-switch-when="outofsync"><span class="hidden-xs" translate>Out of Sync</span><span class="visible-xs">&#9724;</span></span>
+			</td>
+			
+			<td>
+			    <button class="btn btn-sm btn-default" href="" ng-click="editFolder(folder)"><span class="glyphicon glyphicon-pencil"></span></button>
+			</td>
+			<td>
+                <button class="btn btn-sm btn-default" href="" ng-show="['idle', 'stopped'].indexOf(folderStatus(folder)) > -1" ng-click="rescanFolder(folder.id)"><span class="glyphicon glyphicon-refresh"></span></button>
+			</td>
+			<td>
+                <button class="btn btn-sm btn-default" href="" ng-click="moreInfoModal(folder)" "><span class="glyphicon glyphicon-option-vertical"></span></button>
+			</td>
+		  </tr>
+		</tbody>
+	  </table>	
+    </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Device list (top right) -->
+
+      <!-- This device -->
+
+      <div class="col-md-6">
+      <div class="visible-xs"><h3><span translate>Devices</span></h3><hr></div>
+        <div class="panel panel-default" ng-repeat="deviceCfg in [thisDevice()]">
+          <div class="panel-heading" data-toggle="collapse" href="#device-this" style="cursor: pointer">
+            <h3 class="panel-title">
+              <identicon data-value="deviceCfg.deviceID"></identicon>&emsp;{{deviceName(deviceCfg)}}
+            </h3>
+          </div>
+          <div id="device-this" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <table class="table table-condensed">
+                <tbody>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-cloud-download"></span>&nbsp;<span translate>Download Rate</span></th>
+                    <td class="text-right">{{connectionsTotal.inbps | binary}}B/s ({{connectionsTotal.inBytesTotal | binary}}B)</td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;<span translate>Upload Rate</span></th>
+                    <td class="text-right">{{connectionsTotal.outbps | binary}}B/s ({{connectionsTotal.outBytesTotal | binary}}B)</td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-home"></span>&nbsp;<span translate>Local State (Total)</span> </th>
+                    <td class="text-right">{{foldersTotalLocalFiles | alwaysNumber}} <span translate>items</span>, ~{{ foldersTotalLocalBytes | binary}}B</td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-th"></span>&nbsp;<span translate>RAM Utilization</span></th>
+                    <td class="text-right">{{system.sys | binary}}B</td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-dashboard"></span>&nbsp;<span translate>CPU Utilization</span></th>
+                    <td class="text-right">{{system.cpuPercent | alwaysNumber | natural:1}}%</td>
+                  </tr>
+                  <tr ng-if="system.extAnnounceOK != undefined && announceServersTotal > 0">
+                    <th><span class="glyphicon glyphicon-bullhorn"></span>&nbsp;<span translate>Global Discovery</span></th>
+                    <td class="text-right">
+                      <span ng-if="announceServersFailed.length == 0" class="data text-success">
+                        <span>OK</span>
+                      </span>
+                      <span ng-if="announceServersFailed.length != 0" class="data" ng-class="{'text-danger': announceServersFailed.length == announceServersTotal}">
+                        <span popover data-trigger="hover" data-placement="bottom" data-content="{{announceServersFailed.join('\n')}}">
+                          {{announceServersTotal-announceServersFailed.length}}/{{announceServersTotal}}
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-time"></span>&nbsp;<span translate>Uptime</span></th>
+                    <td class="text-right">{{system.uptime | duration:"m"}}</td>
+                  </tr>
+                  <tr>
+                    <th><span class="glyphicon glyphicon-tag"></span>&nbsp;<span translate>Version</span></th>
+                    <td class="text-right">{{versionString()}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
     </div> <!-- /row -->
 
   </div> <!-- /container -->
 
   <!-- Bottom bar -->
 
-  <nav class="navbar navbar-default navbar-fixed-bottom">
+  <!--<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
       <ul class="nav navbar-nav">
         <li><a class="navbar-link" href="http://syncthing.net/" target="_blank"><span class="glyphicon glyphicon-home"></span>&nbsp;<span translate>Home page</span></a></li>
@@ -471,7 +588,7 @@
         <li><a class="navbar-link" href="https://twitter.com/syncthing" target="_blank"><span class="glyphicon glyphicon-send"></span>&nbsp;Twitter</a></li>
       </ul>
     </div>
-  </nav>
+  </nav>-->
 
   <!-- Network error modal -->
 
@@ -947,48 +1064,6 @@
     </div>
   </div>
 
-  <!-- Usage report modal -->
-
-  <div id="ur" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header alert alert-success">
-          <h4 translate class="modal-title">Allow Anonymous Usage Reporting?</h4>
-        </div>
-        <div class="modal-body">
-          <p translate>The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.</p>
-          <p translate translate-value-url="<a href=&quot;https://data.syncthing.net&quot; target=&quot;_blank&quot;>https://data.syncthing.net</a>">The aggregated statistics are publicly available at {%url%}.</p>
-          <button translate type="button" class="btn btn-default btn-sm" ng-show="!reportPreview" ng-click="showReportPreview()">Preview Usage Report</button>
-          <pre ng-if="reportPreview"><small>{{reportData | json}}</small></pre>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success btn-sm" ng-click="acceptUR()"><span class="glyphicon glyphicon-ok"></span>&nbsp;<span translate>Yes</span></button>
-          <button type="button" class="btn btn-danger btn-sm" ng-click="declineUR()"><span class="glyphicon glyphicon-remove"></span>&nbsp;<span translate>No</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Usage report preview modal -->
-
-  <div id="urPreview" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header alert alert-success">
-          <h4 translate class="modal-title">Anonymous Usage Reporting</h4>
-        </div>
-        <div class="modal-body">
-          <p translate>The encrypted usage report is sent daily. It is used to track common platforms, folder sizes and app versions. If the reported data set is changed you will be prompted with this dialog again.</p>
-          <p translate translate-value-url="<a href=&quot;https://data.syncthing.net&quot; target=&quot;_blank&quot;>https://data.syncthing.net</a>">The aggregated statistics are publicly available at {%url%}.</p>
-          <pre><small>{{reportData | json}}</small></pre>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success btn-sm" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span>&nbsp;<span translate>OK</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Needed files modal -->
 
   <modal id="needed" large="yes" status="info" icon="cloud-download" close="yes" title="{{'Out of Sync Items' | translate}}">
@@ -1002,7 +1077,7 @@
 
     <hr/>
 
-    <table class="table table-striped table-condensed">
+    <table class="table table-condensed">
 
       <tr dir-paginate="f in needed | itemsPerPage: neededPageSize" current-page="neededCurrentPage" total-items="neededTotal" pagination-id="needed">
         <!-- Icon -->
@@ -1053,7 +1128,7 @@
       <span translate>The following items could not be synchronized.</span>
       <span translate>They are retried automatically and will be synced when the error is resolved.</span>
     </p>
-    <table class="table table-striped table-condensed">
+    <table class="table table-condensed">
       <tr dir-paginate="e in failedCurrent | itemsPerPage: failedPageSize" current-page="failedCurrentPage" pagination-id="failed">
         <td><abbr title="{{e.path}}">{{e.path | basename}}</abbr></td>
         <td><abbr title="{{e.error}}">{{e.error | lastErrorComponent}}</abbr></td>
@@ -1066,95 +1141,6 @@
       <li>
     </ul>
     <div class="clearfix"></div>
-  </modal>
-
-  <!-- About modal -->
-
-  <modal id="about" large="yes" close="yes" status="info" title="{{'About' | translate}}">
-    <h1 class="text-center"><img alt="Syncthing" title="Syncthing" src="assets/img/logo-horizontal.svg" style="vertical-align: -16px" height="100" width="366"/><br/><small>{{versionString()}}</small></h1>
-    <hr/>
-
-    <p translate>Copyright &copy; 2015 the following Contributors:</p>
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="list-unstyled three-columns" id="contributor-list">
-          <li class="auto-generated">Aaron Bieber</li>
-          <li class="auto-generated">Alexander Graf</li>
-          <li class="auto-generated">Andrew Dunham</li>
-          <li class="auto-generated">Antony Male</li>
-          <li class="auto-generated">Arthur Axel fREW Schmidt</li>
-          <li class="auto-generated">Audrius Butkevicius</li>
-          <li class="auto-generated">Bart De Vries</li>
-          <li class="auto-generated">Ben Curthoys</li>
-          <li class="auto-generated">Ben Schulz</li>
-          <li class="auto-generated">Ben Sidhom</li>
-          <li class="auto-generated">Brandon Philips</li>
-          <li class="auto-generated">Brendan Long</li>
-          <li class="auto-generated">Caleb Callaway</li>
-          <li class="auto-generated">Carsten Hagemann</li>
-          <li class="auto-generated">Cathryne Linenweaver</li>
-          <li class="auto-generated">Chris Howie</li>
-          <li class="auto-generated">Chris Joel</li>
-          <li class="auto-generated">Colin Kennedy</li>
-          <li class="auto-generated">Daniel Bergmann</li>
-          <li class="auto-generated">Daniel Martí</li>
-          <li class="auto-generated">Dennis Wilson</li>
-          <li class="auto-generated">Dominik Heidler</li>
-          <li class="auto-generated">Elias Jarlebring</li>
-          <li class="auto-generated">Emil Hessman</li>
-          <li class="auto-generated">Erik Meitner</li>
-          <li class="auto-generated">Federico Castagnini</li>
-          <li class="auto-generated">Felix Ableitner</li>
-          <li class="auto-generated">Felix Unterpaintner</li>
-          <li class="auto-generated">Francois-Xavier Gsell</li>
-          <li class="auto-generated">Frank Isemann</li>
-          <li class="auto-generated">Gilli Sigurdsson</li>
-          <li class="auto-generated">Jakob Borg</li>
-          <li class="auto-generated">James Patterson</li>
-          <li class="auto-generated">Jaroslav Malec</li>
-          <li class="auto-generated">Jens Diemer</li>
-          <li class="auto-generated">Jochen Voss</li>
-          <li class="auto-generated">Johan Vromans</li>
-          <li class="auto-generated">Karol Różycki</li>
-          <li class="auto-generated">Ken'ichi Kamada</li>
-          <li class="auto-generated">Lode Hoste</li>
-          <li class="auto-generated">Lord Landon Agahnim</li>
-          <li class="auto-generated">Marc Laporte</li>
-          <li class="auto-generated">Marc Pujol</li>
-          <li class="auto-generated">Marcin Dziadus</li>
-          <li class="auto-generated">Michael Jephcote</li>
-          <li class="auto-generated">Michael Tilli</li>
-          <li class="auto-generated">Pascal Jungblut</li>
-          <li class="auto-generated">Peter Hoeg</li>
-          <li class="auto-generated">Philippe Schommers</li>
-          <li class="auto-generated">Phill Luby</li>
-          <li class="auto-generated">Piotr Bejda</li>
-          <li class="auto-generated">Ryan Sullivan</li>
-          <li class="auto-generated">Sergey Mishin</li>
-          <li class="auto-generated">Stefan Tatschner</li>
-          <li class="auto-generated">Tim Abell</li>
-          <li class="auto-generated">Tobias Nygren</li>
-          <li class="auto-generated">Tomas Cerveny</li>
-          <li class="auto-generated">Tully Robinson</li>
-          <li class="auto-generated">Veeti Paananen</li>
-          <li class="auto-generated">Vil Brekin</li>
-        </ul>
-      </div>
-    </div>
-    <hr/>
-
-    <p translate>Syncthing includes the following software or portions thereof:</p>
-    <ul class="list-unstyled two-columns">
-      <li><a href="http://golang.org/">The Go Programming Language</a>, Copyright &copy; 2012 The Go Authors.</li>
-      <li><a href="https://bitbucket.org/kardianos/osext">kardianos/osext</a>, Copyright &copy; 2012 Daniel Theophanes.</li>
-      <li><a href="https://code.google.com/p/snappy-go/">snappy-go</a>, Copyright &copy; 2011 The Snappy-Go Authors.</li>
-      <li><a href="https://github.com/golang/groupcache">groupcache/lru</a>, Copyright &copy; 2013 Google Inc.</li>
-      <li><a href="https://github.com/juju/ratelimit">juju/ratelimit</a>, Copyright &copy; 2014 Canonical Ltd.</li>
-      <li><a href="https://github.com/syndtr/goleveldb">syndtr/goleveldb</a>, Copyright &copy; 2012, Suryandaru Triandana</li>
-      <li><a href="https://github.com/vitrun/qart">vitrun/qart</a>, Copyright &copy; The Go Authors.</li>
-      <li><a href="https://angularjs.org/">AngularJS</a>, Copyright &copy; 2010-2014 Google, Inc.</li>
-      <li><a href="http://getbootstrap.com/">Bootstrap</a>, Copyright &copy; 2011-2014 Twitter, Inc.</li>
-    </ul>
   </modal>
 
   <!-- Advanced modal -->
@@ -1275,6 +1261,14 @@
   <script src="assets/lang/prettyprint.js"></script>
   <script src="scripts/syncthing/app.js"></script>
   <!-- / gui application code -->
+  
+  <script type="text/javascript">
+    
+    $(document).ready(function() {
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+});
+    
+</script>
 
 </body>
 </html>

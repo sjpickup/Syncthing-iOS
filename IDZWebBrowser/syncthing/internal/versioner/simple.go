@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/syncthing/syncthing/internal/osutil"
+	"../../internal/osutil"
 )
 
 func init() {

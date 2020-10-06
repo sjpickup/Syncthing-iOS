@@ -24,8 +24,8 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/config"
+	"../../internal/sync"
 )
 
 // We set the API key via the STGUIAPIKEY variable when we launch the binary,

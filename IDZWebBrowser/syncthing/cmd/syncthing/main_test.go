@@ -11,9 +11,9 @@ import (
 	"testing"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/db"
-	"github.com/syncthing/syncthing/internal/model"
+	"../../internal/config"
+	"../../internal/db"
+	"../../internal/model"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/storage"

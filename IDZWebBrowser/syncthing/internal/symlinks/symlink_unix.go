@@ -12,7 +12,7 @@ import (
 	"os"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/osutil"
+	"../../internal/osutil"
 )
 
 var (

@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/config"
+	"../../internal/sync"
 	"golang.org/x/crypto/bcrypt"
 )
 

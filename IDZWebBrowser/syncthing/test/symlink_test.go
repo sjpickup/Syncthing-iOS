@@ -16,9 +16,9 @@ import (
 	"testing"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/rc"
-	"github.com/syncthing/syncthing/internal/symlinks"
+	"../../internal/config"
+	"../../internal/rc"
+	"../../internal/symlinks"
 )
 
 func symlinksSupported() bool {

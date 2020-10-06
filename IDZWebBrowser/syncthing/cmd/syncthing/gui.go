@@ -26,15 +26,15 @@ import (
 
 	"github.com/calmh/logger"
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/auto"
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/db"
-	"github.com/syncthing/syncthing/internal/discover"
-	"github.com/syncthing/syncthing/internal/events"
-	"github.com/syncthing/syncthing/internal/model"
-	"github.com/syncthing/syncthing/internal/osutil"
-	"github.com/syncthing/syncthing/internal/sync"
-	"github.com/syncthing/syncthing/internal/upgrade"
+	"../../internal/auto"
+	"../../internal/config"
+	"../../internal/db"
+	"../../internal/discover"
+	"../../internal/events"
+	"../../internal/model"
+	"../../internal/osutil"
+	"../../internal/sync"
+	"../../internal/upgrade"
 	"github.com/vitrun/qart/qr"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -227,9 +227,12 @@ func (s *apiSvc) Serve() {
 	select {
 	case <-s.stop:
 	case <-time.After(time.Second):
-		l.Warnln("API:", err)
+        l.Warnln("API:", err)
 	}
+
 }
+
+
 
 func (s *apiSvc) Stop() {
 	close(s.stop)

@@ -1385,6 +1385,25 @@ angular.module('syncthing.core')
             }
             return 'text';
         };
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        $scope.moreInfoModal = function (folderCfg) {
+            $('#moreInfoFolder').modal();
+        };
+        
+        
+        
 
         // pseudo main. called on all definitions assigned
         initController();

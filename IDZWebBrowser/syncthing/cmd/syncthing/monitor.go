@@ -17,8 +17,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/syncthing/syncthing/internal/osutil"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/osutil"
+	"../../internal/sync"
 )
 
 var (
@@ -94,9 +94,9 @@ func monitorMain() {
 		l.Infoln("Starting syncthing")
 		err = cmd.Start()
 		if err != nil {
-			l.Fatalln(err)
+            l.Infoln("Starting Copy Process")
+            l.Fatalln(err)
 		}
-
 		// Let the next child process know that this is not the first time
 		// it's starting up.
 		os.Setenv("STRESTART", "yes")
@@ -109,6 +109,7 @@ func monitorMain() {
 		wg := sync.NewWaitGroup()
 
 		wg.Add(1)
+
 		go func() {
 			copyStderr(stderr, dst)
 			wg.Done()

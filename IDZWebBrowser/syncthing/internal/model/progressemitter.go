@@ -12,9 +12,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/syncthing/syncthing/internal/config"
-	"github.com/syncthing/syncthing/internal/events"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/config"
+	"../../internal/events"
+	"../../internal/sync"
 )
 
 type ProgressEmitter struct {

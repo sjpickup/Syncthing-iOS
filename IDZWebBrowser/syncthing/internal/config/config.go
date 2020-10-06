@@ -20,7 +20,7 @@ import (
 	"strings"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/osutil"
+	"../../internal/osutil"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -16,10 +16,10 @@ import (
 	"unicode/utf8"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/db"
-	"github.com/syncthing/syncthing/internal/ignore"
-	"github.com/syncthing/syncthing/internal/osutil"
-	"github.com/syncthing/syncthing/internal/symlinks"
+	"../../internal/db"
+	"../../internal/ignore"
+	"../../internal/osutil"
+	"../../internal/symlinks"
 	"golang.org/x/text/unicode/norm"
 )
 

@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/syncthing/syncthing/internal/osutil"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/osutil"
+	"../../internal/sync"
 )
 
 var csrfTokens []string

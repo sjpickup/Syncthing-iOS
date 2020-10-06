@@ -12,7 +12,7 @@ import (
 	stdsync "sync"
 	"time"
 
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/sync"
 )
 
 type EventType int

@@ -16,7 +16,7 @@ import (
 	"sort"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/sync"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 	"github.com/syndtr/goleveldb/leveldb/opt"

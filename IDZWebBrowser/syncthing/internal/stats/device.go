@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"github.com/syncthing/syncthing/internal/db"
+	"../../internal/db"
 	"github.com/syndtr/goleveldb/leveldb"
 )
 

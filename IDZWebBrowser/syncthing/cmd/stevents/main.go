@@ -23,6 +23,7 @@ type event struct {
 	Data map[string]interface{} `json:"data"`
 }
 
+
 func main() {
 	log.SetOutput(os.Stdout)
 	log.SetFlags(0)

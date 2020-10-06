@@ -16,7 +16,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/syncthing/syncthing/internal/sync"
+	"../../internal/sync"
 )
 
 var ErrNoHome = errors.New("No home directory found - set $HOME (or the platform equivalent).")
