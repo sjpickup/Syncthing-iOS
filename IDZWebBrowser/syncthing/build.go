@@ -30,8 +30,6 @@ import (
 	"time"
 )
 
-
-
 var (
 	versionRe = regexp.MustCompile(`-[0-9]{1,3}-g[0-9a-f]{5,10}`)
 	goarch    string
@@ -43,11 +41,7 @@ var (
 
 const minGoVersion = 1.3
 
-
-
-
 func main() {
-
 	log.SetOutput(os.Stdout)
 	log.SetFlags(0)
 
@@ -161,7 +155,7 @@ func main() {
 }
 
 func checkRequiredGoVersion() {
-	ver := run("/Users/sgilani/go1.4/ios/bin/go", "version")
+	ver := run("go", "version")
 	re := regexp.MustCompile(`go version go(\d+\.\d+)`)
 	if m := re.FindSubmatch(ver); len(m) == 2 {
 		vs := string(m[1])
@@ -180,20 +174,20 @@ func checkRequiredGoVersion() {
 }
 
 func setup() {
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "get", "-v", "golang.org/x/tools/cmd/cover")
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "get", "-v", "golang.org/x/tools/cmd/vet")
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "get", "-v", "golang.org/x/net/html")
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "get", "-v", "github.com/tools/godep")
+	runPrint("go", "get", "-v", "golang.org/x/tools/cmd/cover")
+	runPrint("go", "get", "-v", "golang.org/x/tools/cmd/vet")
+	runPrint("go", "get", "-v", "golang.org/x/net/html")
+	runPrint("go", "get", "-v", "github.com/tools/godep")
 }
 
 func test(pkg string) {
 	setBuildEnv()
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "test", "-short", "-timeout", "60s", pkg)
+	runPrint("go", "test", "-short", "-timeout", "60s", pkg)
 }
 
 func bench(pkg string) {
 	setBuildEnv()
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "test", "-run", "NONE", "-bench", ".", pkg)
+	runPrint("go", "test", "-run", "NONE", "-bench", ".", pkg)
 }
 
 func install(pkg string, tags []string) {
@@ -207,11 +201,14 @@ func install(pkg string, tags []string) {
 	}
 	args = append(args, pkg)
 	setBuildEnv()
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", args...)
+	runPrint("go", args...)
 }
 
 func build(pkg string, tags []string) {
 	binary := "syncthing"
+	if goos == "windows" {
+		binary += ".exe"
+	}
 
 	rmr(binary)
 	args := []string{"build", "-ldflags", "-tmpdir ../go-obj -linkmode external"}
@@ -223,7 +220,7 @@ func build(pkg string, tags []string) {
 	}
 	args = append(args, pkg)
 	setBuildEnv()
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", args...)
+	runPrint("go", args...)
 
 	// Create an md5 checksum of the binary, to be included in the archive for
 	// automatic upgrades.
@@ -403,16 +400,16 @@ func setBuildEnv() {
 
 func assets() {
 	setBuildEnv()
-	runPipe("internal/auto/gui.files.go", "/Users/sgilani/go1.4/ios/bin/go", "run", "cmd/genassets/main.go", "gui")
+	runPipe("internal/auto/gui.files.go", "go", "run", "cmd/genassets/main.go", "gui")
 }
 
 func xdr() {
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "generate", "./internal/discover", "./internal/db")
+	runPrint("go", "generate", "./internal/discover", "./internal/db")
 }
 
 func translate() {
 	os.Chdir("gui/assets/lang")
-	runPipe("lang-en-new.json", "/Users/sgilani/go1.4/ios/bin/go", "run", "../../../cmd/translate/main.go", "lang-en.json", "../../index.html")
+	runPipe("lang-en-new.json", "go", "run", "../../../cmd/translate/main.go", "lang-en.json", "../../index.html")
 	os.Remove("lang-en.json")
 	err := os.Rename("lang-en-new.json", "lang-en.json")
 	if err != nil {
@@ -423,7 +420,7 @@ func translate() {
 
 func transifex() {
 	os.Chdir("gui/assets/lang")
-	runPrint("/Users/sgilani/go1.4/ios/bin/go", "run", "../../../cmd/transifexdl/main.go")
+	runPrint("go", "run", "../../../cmd/transifexdl/main.go")
 	os.Chdir("../../..")
 	assets()
 }
@@ -730,7 +727,7 @@ func md5File(file string) error {
 }
 
 func vet(pkg string) {
-	bs, err := runError("/Users/sgilani/go1.4/ios/bin/go", "vet", pkg)
+	bs, err := runError("go", "vet", pkg)
 	if err != nil && err.Error() == "exit status 3" || bytes.Contains(bs, []byte("no such tool \"vet\"")) {
 		// Go said there is no go vet
 		log.Println(`- No go vet, no vetting. Try "go get -u golang.org/x/tools/cmd/vet".`)
