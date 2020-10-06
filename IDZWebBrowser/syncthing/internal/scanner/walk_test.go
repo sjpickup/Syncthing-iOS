@@ -18,8 +18,8 @@ import (
 	"testing"
 
 	"github.com/syncthing/protocol"
-	"../../internal/ignore"
-	"../../internal/osutil"
+	"github.com/syncthing/syncthing/internal/ignore"
+	"github.com/syncthing/syncthing/internal/osutil"
 	"golang.org/x/text/unicode/norm"
 )
 

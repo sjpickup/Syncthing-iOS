@@ -12,9 +12,9 @@ import (
 	"path/filepath"
 
 	"github.com/syncthing/protocol"
-	"../../internal/events"
-	"../../internal/osutil"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 // The Committer interface is implemented by objects that need to know about

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"../../internal/config"
-	"../../internal/events"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 var timeout = 10 * time.Millisecond

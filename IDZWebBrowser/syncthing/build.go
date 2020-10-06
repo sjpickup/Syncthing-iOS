@@ -210,8 +210,8 @@ func build(pkg string, tags []string) {
 		binary += ".exe"
 	}
 
-	rmr(binary)
-	args := []string{"build", "-ldflags", "-tmpdir ../go-obj -linkmode external"}
+	rmr(binary, binary+".md5")
+	args := []string{"build", "-ldflags", ldflags()}
 	if len(tags) > 0 {
 		args = append(args, "-tags", strings.Join(tags, ","))
 	}
@@ -224,10 +224,10 @@ func build(pkg string, tags []string) {
 
 	// Create an md5 checksum of the binary, to be included in the archive for
 	// automatic upgrades.
-	//err := md5File(binary)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	err := md5File(binary)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func buildTar() {

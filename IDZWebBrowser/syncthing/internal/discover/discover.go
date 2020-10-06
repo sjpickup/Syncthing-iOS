@@ -17,9 +17,9 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/beacon"
-	"../../internal/events"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/beacon"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 type Discoverer struct {

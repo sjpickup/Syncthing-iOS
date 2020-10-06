@@ -15,8 +15,6 @@ import (
 	"time"
 )
 
-
-
 func init() {
 	if innerProcess && os.Getenv("STBLOCKPROFILE") != "" {
 		profiler := pprof.Lookup("block")

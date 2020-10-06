@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"time"
 
-	"../../internal/osutil"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 func init() {

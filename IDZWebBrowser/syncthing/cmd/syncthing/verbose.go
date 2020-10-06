@@ -9,7 +9,7 @@ package main
 import (
 	"fmt"
 
-	"../../internal/events"
+	"github.com/syncthing/syncthing/internal/events"
 )
 
 // The verbose logging service subscribes to events and prints these in

@@ -15,9 +15,9 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/config"
-	"../../internal/events"
-	"../../internal/model"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/model"
 	"github.com/thejerf/suture"
 )
 

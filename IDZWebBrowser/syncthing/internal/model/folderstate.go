@@ -9,8 +9,8 @@ package model
 import (
 	"time"
 
-	"../../internal/events"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 type folderState int

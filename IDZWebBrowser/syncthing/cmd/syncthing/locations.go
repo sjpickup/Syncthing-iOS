@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"../../internal/osutil"
+	"github.com/syncthing/syncthing/internal/osutil"
 )
 
 type locationEnum string
@@ -54,7 +54,7 @@ var locations = map[locationEnum]string{
 	locPanicLog:      "${config}/panic-${timestamp}.log",
 	locAuditLog:      "${config}/audit-${timestamp}.log",
 	locGUIAssets:     "${config}/gui",
-	locDefFolder:     "${home}/Documents/Sync",
+	locDefFolder:     "${home}/Sync",
 }
 
 // expandLocations replaces the variables in the location map with actual
@@ -86,7 +86,7 @@ func defaultConfigDir() string {
 		return filepath.Join(os.Getenv("AppData"), "Syncthing")
 
 	case "darwin":
-		dir, err := osutil.ExpandTilde("~/Documents/Syncthing")
+		dir, err := osutil.ExpandTilde("~/Library/Application Support/Syncthing")
 		if err != nil {
 			l.Fatalln(err)
 		}
@@ -96,7 +96,7 @@ func defaultConfigDir() string {
 		if xdgCfg := os.Getenv("XDG_CONFIG_HOME"); xdgCfg != "" {
 			return filepath.Join(xdgCfg, "syncthing")
 		}
-		dir, err := osutil.ExpandTilde("~/Documents/syncthingConfig")
+		dir, err := osutil.ExpandTilde("~/.config/syncthing")
 		if err != nil {
 			l.Fatalln(err)
 		}

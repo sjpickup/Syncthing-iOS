@@ -4,12 +4,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // You can obtain one at http://mozilla.org/MPL/2.0/.
 
-// +build arm64 darwin, !cgo
-
 package main
 
 import (
-	_ "runtime/cgo"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -27,31 +24,24 @@ import (
 	"strconv"
 	"strings"
 	"time"
-    //"bytes"
 
 	"github.com/calmh/logger"
 	"github.com/juju/ratelimit"
 	"github.com/syncthing/protocol"
-	"../../internal/config"
-	"../../internal/db"
-	"../../internal/discover"
-	"../../internal/events"
-	"../../internal/model"
-	"../../internal/osutil"
-	"../../internal/symlinks"
-	"../../internal/upgrade"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/db"
+	"github.com/syncthing/syncthing/internal/discover"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/model"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/symlinks"
+	"github.com/syncthing/syncthing/internal/upgrade"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/opt"
 	"github.com/thejerf/suture"
 	"golang.org/x/crypto/bcrypt"
 )
-
-/*
-#cgo LDFLAGS: -Wl,-U,_iosmain -framework UIKit -framework Foundation -framework CoreGraphics
-extern void iosmain(int argc, char *argv[]);
-*/
-import "C"
 
 var (
 	Version     = "unknown-dev"
@@ -80,9 +70,7 @@ const (
 
 var l = logger.DefaultLogger
 
-
 func init() {
-
 	if Version != "unknown-dev" {
 		// If not a generic dev build, version string should come from git describe
 		exp := regexp.MustCompile(`^v\d+\.\d+\.\d+(-[a-z0-9]+)*(\+\d+-g[0-9a-f]+)?(-dirty)?$`)
@@ -110,8 +98,6 @@ func init() {
 	if os.Getenv("STTRACE") != "" {
 		logFlags = log.Ltime | log.Ldate | log.Lmicroseconds | log.Lshortfile
 	}
-
-
 }
 
 var (
@@ -211,7 +197,7 @@ var (
 	logFile           string
 	auditEnabled      bool
 	verbose           bool
-	noRestart         = os.Getenv("STNORESTART") != "1"
+	noRestart         = os.Getenv("STNORESTART") != ""
 	noUpgrade         = os.Getenv("STNOUPGRADE") != ""
 	guiAddress        = os.Getenv("STGUIADDRESS") // legacy
 	guiAuthentication = os.Getenv("STGUIAUTH")    // legacy
@@ -224,16 +210,6 @@ var (
 )
 
 func main() {
-
-fmt.Printf("Say hello to Syncthing from Go!\n")
-C.iosmain(0, nil)
-
-}
-
-//export WebServer
-func WebServer() {
-fmt.Println("Run DevSync")
-
 	if runtime.GOOS == "windows" {
 		// On Windows, we use a log file by default. Setting the -logfile flag
 		// to "-" disables this behavior.
@@ -342,10 +318,9 @@ fmt.Println("Run DevSync")
 		if err != nil {
 			l.Warnln("Failed to save config", err)
 		}
+
 		return
 	}
-
-
 
 	if info, err := os.Stat(baseDirs["config"]); err == nil && !info.IsDir() {
 		l.Fatalln("Config directory", baseDirs["config"], "is not a directory")
@@ -529,7 +504,6 @@ func syncthingMain() {
 		} else {
 			l.Fatalln("Configuration:", err)
 		}
-
 	} else {
 		l.Infoln("No config file; starting with empty defaults")
 		myName, _ = os.Hostname()
@@ -897,24 +871,10 @@ func resetDB() error {
 	return os.RemoveAll(locations[locDatabase])
 }
 
-
-//export Restart
-func Restart() {
-l.Infoln("Restarting")
-stop <- exitRestarting
-}
-
 func restart() {
 	l.Infoln("Restarting")
 	stop <- exitRestarting
 }
-
-//export ShutDown
-func ShutDown() {
-l.Infoln("Shutting down")
-stop <- exitSuccess
-}
-
 
 func shutdown() {
 	l.Infoln("Shutting down")

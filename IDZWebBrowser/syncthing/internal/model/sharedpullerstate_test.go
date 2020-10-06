@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 func TestSourceFileOK(t *testing.T) {

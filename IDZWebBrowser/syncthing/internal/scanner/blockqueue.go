@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 
 	"github.com/syncthing/protocol"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 // The parallell hasher reads FileInfo structures from the inbox, hashes the

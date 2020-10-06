@@ -15,7 +15,7 @@ import (
 
 	"github.com/syncthing/protocol"
 
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 var device protocol.DeviceID

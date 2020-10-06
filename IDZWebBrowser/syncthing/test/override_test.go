@@ -17,8 +17,8 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/config"
-	"../../internal/rc"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/rc"
 )
 
 func TestOverride(t *testing.T) {

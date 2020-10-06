@@ -19,9 +19,9 @@ import (
 	"sort"
 
 	"github.com/syncthing/protocol"
-	"../../internal/config"
-	"../../internal/osutil"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/sync"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/util"

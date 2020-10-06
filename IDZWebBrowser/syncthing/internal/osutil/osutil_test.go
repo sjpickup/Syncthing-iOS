@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"testing"
 
-	"../../internal/osutil"
+	"github.com/syncthing/syncthing/internal/osutil"
 )
 
 func TestInWriteableDir(t *testing.T) {

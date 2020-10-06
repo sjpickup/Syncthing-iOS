@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 
 	"github.com/syncthing/protocol"
-	"../../internal/db"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/db"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 // A sharedPullerState is kept for each file that is being synced and is kept

@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/syncthing/protocol"
-	"../../internal/config"
+	"github.com/syncthing/syncthing/internal/config"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/storage"

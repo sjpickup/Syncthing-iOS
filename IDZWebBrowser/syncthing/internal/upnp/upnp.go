@@ -25,7 +25,7 @@ import (
 	"strings"
 	"time"
 
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 // An IGD is a UPnP InternetGatewayDevice.

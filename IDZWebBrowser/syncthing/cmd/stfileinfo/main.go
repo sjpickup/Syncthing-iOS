@@ -13,7 +13,7 @@ import (
 	"path/filepath"
 
 	"github.com/syncthing/protocol"
-	"../../internal/scanner"
+	"github.com/syncthing/syncthing/internal/scanner"
 )
 
 func main() {

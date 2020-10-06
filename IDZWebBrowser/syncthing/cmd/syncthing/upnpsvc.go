@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	"../../internal/config"
-	"../../internal/upnp"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/upnp"
 )
 
 // The UPnP service runs a loop for discovery of IGDs (Internet Gateway

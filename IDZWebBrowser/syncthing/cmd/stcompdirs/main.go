@@ -16,7 +16,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"../../internal/symlinks"
+	"github.com/syncthing/syncthing/internal/symlinks"
 )
 
 func main() {

@@ -17,15 +17,15 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/config"
-	"../../internal/db"
-	"../../internal/events"
-	"../../internal/ignore"
-	"../../internal/osutil"
-	"../../internal/scanner"
-	"../../internal/symlinks"
-	"../../internal/sync"
-	"../../internal/versioner"
+	"github.com/syncthing/syncthing/internal/config"
+	"github.com/syncthing/syncthing/internal/db"
+	"github.com/syncthing/syncthing/internal/events"
+	"github.com/syncthing/syncthing/internal/ignore"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/scanner"
+	"github.com/syncthing/syncthing/internal/symlinks"
+	"github.com/syncthing/syncthing/internal/sync"
+	"github.com/syncthing/syncthing/internal/versioner"
 )
 
 // TODO: Stop on errors

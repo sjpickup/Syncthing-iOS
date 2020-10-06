@@ -14,8 +14,8 @@ package db
 
 import (
 	"github.com/syncthing/protocol"
-	"../../internal/osutil"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/sync"
 	"github.com/syndtr/goleveldb/leveldb"
 )
 

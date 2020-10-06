@@ -26,9 +26,9 @@ import (
 	"time"
 	"unicode"
 
-	"../../internal/osutil"
-	"../../internal/rc"
-	"../../internal/symlinks"
+	"github.com/syncthing/syncthing/internal/osutil"
+	"github.com/syncthing/syncthing/internal/rc"
+	"github.com/syncthing/syncthing/internal/symlinks"
 )
 
 func init() {

@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/scanner"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/scanner"
+	"github.com/syncthing/syncthing/internal/sync"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/storage"

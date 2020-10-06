@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"../../internal/events"
+	"github.com/syncthing/syncthing/internal/events"
 )
 
 func TestAuditService(t *testing.T) {

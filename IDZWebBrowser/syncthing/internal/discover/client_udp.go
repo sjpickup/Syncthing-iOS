@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/syncthing/protocol"
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 func init() {

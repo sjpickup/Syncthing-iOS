@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"../../internal/events"
+	"github.com/syncthing/syncthing/internal/events"
 )
 
 var timeout = 100 * time.Millisecond

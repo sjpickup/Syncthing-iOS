@@ -10,7 +10,7 @@ import (
 	"math/rand"
 	"sort"
 
-	"../../internal/sync"
+	"github.com/syncthing/syncthing/internal/sync"
 )
 
 type jobQueue struct {
